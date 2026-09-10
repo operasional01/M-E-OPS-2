@@ -27,6 +27,162 @@
             </div>
         </div>
 
+        <!-- 1. DASHBOARD ANALISA PERBANDINGAN RA vs RI (SUMMARY CARDS) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- VLL Comparison Card -->
+            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-600">
+                <h2 class="text-md font-bold text-slate-700 uppercase tracking-wider mb-4 border-b pb-2 flex justify-between items-center">
+                    <span>📊 Perbandingan VLL</span>
+                    <span id="badgeCapaiVll" class="text-xs px-2.5 py-1 rounded-full font-bold">0%</span>
+                </h2>
+                <div class="grid grid-cols-3 gap-3 text-center">
+                    <div class="bg-amber-50 p-3 rounded-lg border border-amber-200">
+                        <p class="text-xs text-amber-700 font-semibold mb-1">Rencana (RA)</p>
+                        <p id="kpiProjVll" class="text-lg font-bold text-amber-800">0</p>
+                        <p class="text-[10px] text-amber-600">Kendaraan</p>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                        <p class="text-xs text-blue-700 font-semibold mb-1">Realisasi (RI)</p>
+                        <p id="kpiRealVll" class="text-lg font-bold text-blue-800">0</p>
+                        <p class="text-[10px] text-blue-600">Kendaraan</p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <p class="text-xs text-slate-600 font-semibold mb-1">Deviasi VLL</p>
+                        <p id="kpiDevVll" class="text-lg font-bold text-slate-800">0</p>
+                        <p class="text-[10px] text-slate-500">Selisih</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Revenue Comparison Card -->
+            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-emerald-600">
+                <h2 class="text-md font-bold text-slate-700 uppercase tracking-wider mb-4 border-b pb-2 flex justify-between items-center">
+                    <span>💰 Perbandingan Pendapatan</span>
+                    <span id="badgeCapaiRev" class="text-xs px-2.5 py-1 rounded-full font-bold">0%</span>
+                </h2>
+                <div class="grid grid-cols-3 gap-3 text-center">
+                    <div class="bg-amber-50 p-3 rounded-lg border border-amber-200">
+                        <p class="text-xs text-amber-700 font-semibold mb-1">Rencana (RA)</p>
+                        <p id="kpiProjRev" class="text-sm font-bold text-amber-800 mt-1">Rp 0</p>
+                    </div>
+                    <div class="bg-emerald-50 p-3 rounded-lg border border-emerald-200">
+                        <p class="text-xs text-emerald-700 font-semibold mb-1">Realisasi (RI)</p>
+                        <p id="kpiRealRev" class="text-sm font-bold text-emerald-800 mt-1">Rp 0</p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <p class="text-xs text-slate-600 font-semibold mb-1">Deviasi Rp</p>
+                        <p id="kpiDevRev" class="text-sm font-bold text-slate-800 mt-1">Rp 0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== DASHBOARD HASIL FORECAST (EST. VLL & LHR) ==================== -->
+        <div class="bg-slate-900 rounded-xl shadow-lg p-6 text-white border border-teal-500/30">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-700 pb-3 mb-4 gap-2">
+                <div>
+                    <h2 class="text-lg font-bold text-teal-400 flex items-center gap-2">
+                        🔮 Dashboard Forecast (Est. VLL & Est. LHR)
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Ringkasan estimasi pencapaian akhir bulan berbasis Tren Trimmean & Kalender Aktif.</p>
+                </div>
+                <div class="flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 text-xs">
+                    <span class="text-slate-400">Pencapaian Est. vs RA:</span>
+                    <span id="badgeEstVsRa" class="font-bold text-teal-400">0%</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Forecast VLL -->
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-teal-500/40 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-teal-500"></div>
+                    <p class="text-xs text-teal-300 uppercase tracking-wider font-semibold">Est. Total VLL Bulan Full</p>
+                    <p id="cardEstVll" class="text-2xl font-black text-teal-400 mt-2">0</p>
+                    <p class="text-[10px] text-slate-400 mt-1">Kendaraan (Akumulasi RI + Proyeksi)</p>
+                </div>
+
+                <!-- Estimasi LHR -->
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-cyan-500/40 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-cyan-500"></div>
+                    <p class="text-xs text-cyan-300 uppercase tracking-wider font-semibold">Est. LHR Rata-Rata Bulan</p>
+                    <p id="cardEstLhr" class="text-2xl font-black text-cyan-400 mt-2">0</p>
+                    <p class="text-[10px] text-slate-400 mt-1">Kendaraan / Hari (Total Est. ÷ Hari Bulan)</p>
+                </div>
+
+                <!-- Tambahan VLL Sisa Hari -->
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-amber-500/40 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-amber-500"></div>
+                    <p class="text-xs text-amber-300 uppercase tracking-wider font-semibold">Est. Tambahan VLL Sisa Hari</p>
+                    <p id="cardEstSisaVll" class="text-2xl font-black text-amber-400 mt-2">0</p>
+                    <p id="cardEstSisaKet" class="text-[10px] text-slate-400 mt-1">0 Hari Sisa Berjalan</p>
+                </div>
+
+                <!-- Deviasi Proyeksi vs RA -->
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-indigo-500/40 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-indigo-500"></div>
+                    <p class="text-xs text-indigo-300 uppercase tracking-wider font-semibold">Deviasi Forecast vs RA</p>
+                    <p id="cardDevForecast" class="text-2xl font-black text-indigo-300 mt-2">0</p>
+                    <p class="text-[10px] text-slate-400 mt-1">Selisih Est. VLL vs Target Rencana (RA)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. DASHBOARD FORECAST TRIMMEAN VLL & LHR (JUMLAH HARI REALTIME) -->
+        <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-xl shadow-lg p-6 text-white border border-indigo-800">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-indigo-800 pb-3 mb-4 gap-2">
+                <div>
+                    <h2 class="text-lg font-bold text-indigo-300 flex items-center gap-2">
+                        📈 Forecast Trimmean VLL & LHR (<span id="txtBulanRealtime">Bulan Ini</span>)
+                    </h2>
+                    <p class="text-xs text-indigo-200 mt-0.5">Memakai perhitungan hari kalender aktif (<span id="txtJumlahHariBulan">0 Hari</span>) & metode TRIMMEAN untuk hilangkan anomali data.</p>
+                </div>
+                <div class="bg-indigo-900/80 px-3 py-1.5 rounded-lg border border-indigo-700 text-xs text-indigo-200">
+                    Sisa Hari Berjalan: <span id="fcSisaHari" class="font-bold text-amber-400">0 Hari</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-indigo-950/60 p-4 rounded-xl border border-indigo-800/80 text-center">
+                    <p class="text-xs text-indigo-300">Total Hari Terinput (RI)</p>
+                    <p id="fcHariInput" class="text-2xl font-bold text-white mt-1">0 Hari</p>
+                </div>
+                <div class="bg-indigo-950/60 p-4 rounded-xl border border-indigo-800/80 text-center">
+                    <p class="text-xs text-indigo-300">LHR Rata-Rata (Trimmed RI)</p>
+                    <p id="fcLhrTrimmed" class="text-2xl font-bold text-amber-400 mt-1">0</p>
+                    <p class="text-[10px] text-indigo-400">Kendaraan / Hari</p>
+                </div>
+                <div class="bg-indigo-950/60 p-4 rounded-xl border border-indigo-800/80 text-center">
+                    <p class="text-xs text-indigo-300">Estimasi Tambahan VLL Sisa Hari</p>
+                    <p id="fcEstimasiSisa" class="text-2xl font-bold text-cyan-400 mt-1">0</p>
+                    <p class="text-[10px] text-indigo-400">Kendaraan</p>
+                </div>
+                <div class="bg-indigo-950/60 p-4 rounded-xl border border-indigo-800/80 text-center bg-gradient-to-b from-indigo-900/40 to-emerald-950/40">
+                    <p class="text-xs text-emerald-300 font-semibold">Forecast Total VLL 1 Bulan Full</p>
+                    <p id="fcTotalForecast" class="text-2xl font-extrabold text-emerald-400 mt-1">0</p>
+                    <p class="text-[10px] text-emerald-300/80">(RI Aktual + Proyeksi Sisa)</p>
+                </div>
+            </div>
+
+            <!-- Tabel Detail Trimmean per Hari -->
+            <div class="overflow-x-auto rounded-lg border border-indigo-800/60">
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-indigo-950 uppercase text-indigo-300 border-b border-indigo-800">
+                        <tr>
+                            <th class="py-2.5 px-3">Hari</th>
+                            <th class="py-2.5 px-3 text-center">Data Terinput</th>
+                            <th class="py-2.5 px-3 text-center">Total VLL RI</th>
+                            <th class="py-2.5 px-3 text-center">LHR Rata-Rata</th>
+                            <th class="py-2.5 px-3 text-center text-amber-300">LHR Trimmed (Bebas Anomali)</th>
+                            <th class="py-2.5 px-3 text-center text-emerald-300">Estimasi VLL 1 Bulan (Berdasarkan Frekuensi Hari)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyTrimmean" class="divide-y divide-indigo-900/50 bg-slate-950/30">
+                        <!-- Calculated via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <!-- Form Input Data -->
         <div class="bg-white p-6 rounded-xl shadow-md">
             <div class="flex justify-between items-center mb-4 border-b pb-2">
@@ -71,7 +227,7 @@
 
         <!-- DASHBOARD REKAPITULASI LHR HARI & INDEX HARI (NUMBER) -->
         <div class="bg-slate-900 rounded-xl shadow-md overflow-hidden text-white p-6">
-            <h2 class="text-lg font-semibold text-amber-400 border-b border-slate-700 pb-2 mb-4">📅 Rekapitulasi LHR Rata-Rata & Index Hari</h2>
+            <h2 class="text-lg font-semibold text-amber-400 border-b border-slate-700 pb-2 mb-4">📅 Rekapitulasi LHR Weekly & Index Hari</h2>
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm text-slate-200">
                     <thead class="bg-slate-800 uppercase text-xs text-slate-400 border-b border-slate-700">
@@ -159,6 +315,8 @@
             }
             renderTable();
             renderDashboardHari();
+            renderDashboardComparison();
+            renderDashboardTrimmeanForecast();
         });
 
         function formatNum(nilai) {
@@ -167,6 +325,52 @@
 
         function formatCurrency(num) {
             return 'Rp ' + new Intl.NumberFormat('id-ID').format(num);
+        }
+
+        // FUNGSI MENDATANGKAN JUMLAH HARI & TANGGAL REALTIME
+        function getRealtimeDaysInMonth() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth(); // 0 - 11
+            
+            // Mendapatkan jumlah hari dalam bulan berjalan
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            const monthNames = [
+                "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+                "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+            ];
+
+            // Hitung frekuensi masing-masing hari (Senin-Minggu) dalam bulan realtime ini
+            const dayCounts = { "Senin": 0, "Selasa": 0, "Rabu": 0, "Kamis": 0, "Jumat": 0, "Sabtu": 0, "Minggu": 0 };
+            const jsDayToName = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const dateObj = new Date(year, month, d);
+                const dayName = jsDayToName[dateObj.getDay()];
+                dayCounts[dayName]++;
+            }
+
+            return {
+                daysInMonth,
+                monthName: monthNames[month],
+                year,
+                dayCounts
+            };
+        }
+
+        // FUNGSI TRIMMEAN LOGIC
+        function calculateTrimMean(arr) {
+            if (!arr || arr.length === 0) return 0;
+            if (arr.length <= 2) {
+                const sum = arr.reduce((a, b) => a + b, 0);
+                return sum / arr.length;
+            }
+            const sorted = [...arr].sort((a, b) => a - b);
+            sorted.shift(); // Buang nilai terendah
+            sorted.pop();   // Buang nilai tertinggi
+            const sum = sorted.reduce((a, b) => a + b, 0);
+            return sum / sorted.length;
         }
 
         function saveData(e) {
@@ -246,7 +450,141 @@
             }
         }
 
-        // --- DASHBOARD REKAPITULASI HARI & INDEX HARI (LHR HARI / TOTAL LHR RATA-RATA) ---
+        // --- 1. RENDER DASHBOARD ANALISIS PERBANDINGAN RA & RI ---
+        function renderDashboardComparison() {
+            let totalProjVll = 0, totalRealVll = 0;
+            let totalProjRev = 0, totalRealRev = 0;
+
+            dataReport.forEach(item => {
+                totalProjVll += parseInt(item.projVll) || 0;
+                totalRealVll += parseInt(item.realVll) || 0;
+                totalProjRev += parseInt(item.projRev) || 0;
+                totalRealRev += parseInt(item.realRev) || 0;
+            });
+
+            const devVll = totalRealVll - totalProjVll;
+            const capaiVll = totalProjVll > 0 ? ((totalRealVll / totalProjVll) * 100).toFixed(1) : 0;
+
+            const devRev = totalRealRev - totalProjRev;
+            const capaiRev = totalProjRev > 0 ? ((totalRealRev / totalProjRev) * 100).toFixed(1) : 0;
+
+            document.getElementById('kpiProjVll').innerText = formatNum(totalProjVll);
+            document.getElementById('kpiRealVll').innerText = formatNum(totalRealVll);
+            document.getElementById('kpiDevVll').innerText = (devVll > 0 ? '+' : '') + formatNum(devVll);
+
+            const badgeVll = document.getElementById('badgeCapaiVll');
+            badgeVll.innerText = capaiVll + '% Capai';
+            badgeVll.className = `text-xs px-2.5 py-1 rounded-full font-bold ${capaiVll >= 100 ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}`;
+
+            document.getElementById('kpiProjRev').innerText = formatCurrency(totalProjRev);
+            document.getElementById('kpiRealRev').innerText = formatCurrency(totalRealRev);
+            document.getElementById('kpiDevRev').innerText = (devRev > 0 ? '+' : '') + formatCurrency(devRev);
+
+            const badgeRev = document.getElementById('badgeCapaiRev');
+            badgeRev.innerText = capaiRev + '% Capai';
+            badgeRev.className = `text-xs px-2.5 py-1 rounded-full font-bold ${capaiRev >= 100 ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}`;
+        }
+
+        // --- 2. RENDER DASHBOARD FORECAST TRIMMEAN VLL & LHR (REALTIME HARI BULAN) ---
+        function renderDashboardTrimmeanForecast() {
+            const realtimeInfo = getRealtimeDaysInMonth();
+            const listHari = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
+            const dataPerHari = {};
+            
+            listHari.forEach(h => { dataPerHari[h] = []; });
+
+            let totalHariRI = 0;
+            let totalVllRI = 0;
+            let totalProjVllRA = 0;
+
+            dataReport.forEach(item => {
+                const periodeText = (item.periode || "").toString().toLowerCase().trim();
+                const inputHari = parseInt(item.hari) || 0;
+                const realVll = parseInt(item.realVll) || 0;
+                const projVll = parseInt(item.projVll) || 0;
+
+                totalHariRI += inputHari;
+                totalVllRI += realVll;
+                totalProjVllRA += projVll;
+
+                listHari.forEach(h => {
+                    if (periodeText.includes(h.toLowerCase())) {
+                        const lhrHarian = inputHari > 0 ? (realVll / inputHari) : 0;
+                        if (lhrHarian > 0) {
+                            dataPerHari[h].push(lhrHarian);
+                        }
+                    }
+                });
+            });
+
+            document.getElementById('txtBulanRealtime').innerText = `${realtimeInfo.monthName} ${realtimeInfo.year}`;
+            document.getElementById('txtJumlahHariBulan').innerText = `${realtimeInfo.daysInMonth} Hari`;
+
+            const tbody = document.getElementById('tbodyTrimmean');
+            tbody.innerHTML = '';
+
+            let sumLhrTrimmed = 0;
+            let activeDaysCount = 0;
+
+            listHari.forEach(h => {
+                const arrLhr = dataPerHari[h];
+                const countData = arrLhr.length;
+                const totalVllHari = arrLhr.reduce((a, b) => a + b, 0);
+                const avgLhr = countData > 0 ? (totalVllHari / countData) : 0;
+                const trimmedLhr = calculateTrimMean(arrLhr);
+
+                if (countData > 0) {
+                    sumLhrTrimmed += trimmedLhr;
+                    activeDaysCount++;
+                }
+
+                // Kalkulasi Estimasi 1 Bulan berdasarkan Kemunculan Hari di Bulan Aktif
+                const frekuensiHariRealtime = realtimeInfo.dayCounts[h] || 4;
+                const estimasiBulanHari = trimmedLhr * frekuensiHariRealtime;
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-indigo-900/30 transition">
+                        <td class="py-2.5 px-3 font-semibold text-indigo-200">${h} (${frekuensiHariRealtime}x)</td>
+                        <td class="py-2.5 px-3 text-center font-mono">${countData} Sampel</td>
+                        <td class="py-2.5 px-3 text-center font-mono">${formatNum(totalVllHari)}</td>
+                        <td class="py-2.5 px-3 text-center font-mono text-slate-300">${formatNum(avgLhr)}</td>
+                        <td class="py-2.5 px-3 text-center font-mono font-bold text-amber-400">${formatNum(trimmedLhr)}</td>
+                        <td class="py-2.5 px-3 text-center font-mono font-bold text-emerald-400">${formatNum(estimasiBulanHari)}</td>
+                    </tr>
+                `;
+            });
+
+            const avgLhrTrimmedGlobal = activeDaysCount > 0 ? (sumLhrTrimmed / activeDaysCount) : 0;
+            const targetTotalHari = realtimeInfo.daysInMonth; // Hari otomatis menyesuaikan bulan realtime
+            const sisaHari = Math.max(0, targetTotalHari - totalHariRI);
+            const estimasiSisaVll = sisaHari * avgLhrTrimmedGlobal;
+            const totalForecastVll = totalVllRI + estimasiSisaVll;
+            
+            // Kalkulasi Est. LHR Rata-Rata Bulan Full
+            const estLhrAveraged = targetTotalHari > 0 ? (totalForecastVll / targetTotalHari) : 0;
+            const deviasiForecastVsRa = totalForecastVll - totalProjVllRA;
+            const persenPencapaianEstVsRa = totalProjVllRA > 0 ? ((totalForecastVll / totalProjVllRA) * 100).toFixed(1) : 0;
+
+            // Render komponen Forecast Section
+            document.getElementById('fcHariInput').innerText = `${totalHariRI} / ${targetTotalHari} Hari`;
+            document.getElementById('fcSisaHari').innerText = `${sisaHari} Hari`;
+            document.getElementById('fcLhrTrimmed').innerText = formatNum(avgLhrTrimmedGlobal);
+            document.getElementById('fcEstimasiSisa').innerText = formatNum(estimasiSisaVll);
+            document.getElementById('fcTotalForecast').innerText = formatNum(totalForecastVll);
+
+            // Render khusus Dashboard Kartu Hasil Forecast Baru
+            document.getElementById('cardEstVll').innerText = formatNum(totalForecastVll);
+            document.getElementById('cardEstLhr').innerText = formatNum(estLhrAveraged);
+            document.getElementById('cardEstSisaVll').innerText = formatNum(estimasiSisaVll);
+            document.getElementById('cardEstSisaKet').innerText = `${sisaHari} Hari Sisa Berjalan`;
+            document.getElementById('cardDevForecast').innerText = (deviasiForecastVsRa > 0 ? '+' : '') + formatNum(deviasiForecastVsRa);
+            
+            const badgeEstVsRa = document.getElementById('badgeEstVsRa');
+            badgeEstVsRa.innerText = `${persenPencapaianEstVsRa}% Pencapaian`;
+            badgeEstVsRa.className = `font-bold ${persenPencapaianEstVsRa >= 100 ? 'text-teal-400' : 'text-rose-400'}`;
+        }
+
+        // --- DASHBOARD REKAPITULASI HARI & INDEX HARI ---
         function renderDashboardHari() {
             const tbodyHari = document.getElementById('tbodyHari');
             tbodyHari.innerHTML = '';
@@ -258,7 +596,6 @@
                 rekap[h] = { vll: 0, hari: 0, lhr: 0 };
             });
 
-            // 1. Kelompokkan VLL dan Jumlah Hari per Hari
             dataReport.forEach(item => {
                 const periodeText = (item.periode || "").toString().toLowerCase().trim();
                 const inputHari = parseInt(item.hari) || 0;
@@ -273,7 +610,6 @@
                 });
             });
 
-            // 2. Hitung LHR Rata-Rata per Hari dan Total Rata-Rata LHR Seluruh Hari
             let sumLHR = 0;
             let countActiveDays = 0;
 
@@ -288,15 +624,11 @@
                 }
             });
 
-            // Total LHR Rata-Rata Seluruh Hari
             const totalLHRRataRata = countActiveDays > 0 ? (sumLHR / countActiveDays) : 0;
 
-            // 3. Render ke UI dengan Rumus: LHR Hari / Total LHR Rata-Rata
             listHari.forEach(h => {
                 const item = rekap[h];
                 const avgLHR = item.lhr;
-                
-                // Index Hari dalam format angka/desimal
                 const indexHariNumber = totalLHRRataRata > 0 ? (avgLHR / totalLHRRataRata).toFixed(2) : "0.00";
                 
                 tbodyHari.innerHTML += `
