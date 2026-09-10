@@ -27,6 +27,48 @@
             </div>
         </div>
 
+        <!-- Form Input Data (DIPINDAHKAN KE SINI / PALING ATAS) -->
+        <div class="bg-white p-6 rounded-xl shadow-md">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <h2 id="formTitle" class="text-lg font-semibold text-slate-800">Input Data Evaluasi VLL</h2>
+                <button id="cancelEditBtn" onclick="resetForm()" class="hidden text-xs text-rose-600 hover:underline font-semibold">
+                    ✕ Batal Edit
+                </button>
+            </div>
+            <form id="evalForm" onsubmit="saveData(event)" class="grid grid-cols-1 md:grid-cols-6 gap-4">
+                <input type="hidden" id="editId" value="">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Periode / Hari</label>
+                    <input type="text" id="inputPeriode" placeholder="Contoh: Senin / Minggu ke-1 Senin" required class="w-full px-3 py-2 border rounded-lg text-sm bg-slate-100 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Jumlah Hari</label>
+                    <input type="number" id="inputHari" placeholder="0" min="0" required class="w-full px-3 py-2 border rounded-lg text-sm bg-slate-100 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Proyeksi VLL (RA)</label>
+                    <input type="number" id="projVll" placeholder="0" min="0" required class="w-full px-3 py-2 border rounded-lg text-sm bg-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Proyeksi Pendapatan</label>
+                    <input type="number" id="projRev" placeholder="0" min="0" required class="w-full px-3 py-2 border rounded-lg text-sm bg-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Realisasi VLL (RI)</label>
+                    <input type="number" id="realVll" placeholder="0" min="0" required class="w-full px-3 py-2 border rounded-lg text-sm bg-blue-200 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Realisasi Pendapatan</label>
+                    <input type="number" id="realRev" placeholder="0" min="0" required class="w-full px-3 py-2 border rounded-lg text-sm bg-blue-200 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div class="flex items-end">
+                    <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition duration-200">
+                        + Tambah Data
+                    </button>
+                </div>
+            </form>
+        </div>
+
         <!-- 1. DASHBOARD ANALISA PERBANDINGAN RA vs RI (SUMMARY CARDS) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- VLL Comparison Card -->
@@ -39,17 +81,14 @@
                     <div class="bg-amber-50 p-3 rounded-lg border border-amber-200">
                         <p class="text-xs text-amber-700 font-semibold mb-1">Rencana (RA)</p>
                         <p id="kpiProjVll" class="text-lg font-bold text-amber-800">0</p>
-                        <p class="text-[10px] text-amber-600">Kendaraan</p>
                     </div>
                     <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
                         <p class="text-xs text-blue-700 font-semibold mb-1">Realisasi (RI)</p>
                         <p id="kpiRealVll" class="text-lg font-bold text-blue-800">0</p>
-                        <p class="text-[10px] text-blue-600">Kendaraan</p>
                     </div>
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
                         <p class="text-xs text-slate-600 font-semibold mb-1">Deviasi VLL</p>
                         <p id="kpiDevVll" class="text-lg font-bold text-slate-800">0</p>
-                        <p class="text-[10px] text-slate-500">Selisih</p>
                     </div>
                 </div>
             </div>
@@ -77,12 +116,12 @@
             </div>
         </div>
 
-        <!-- ==================== DASHBOARD HASIL FORECAST (EST. VLL & LHR) ==================== -->
+        <!-- ==================== DASHBOARD HASIL FORECAST (EST. VLL & EST. LHR) ==================== -->
         <div class="bg-slate-900 rounded-xl shadow-lg p-6 text-white border border-teal-500/30">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-700 pb-3 mb-4 gap-2">
                 <div>
                     <h2 class="text-lg font-bold text-teal-400 flex items-center gap-2">
-                        🔮 Dashboard Forecast (Est. VLL & Est. LHR)
+                        🚀 Dashboard Forecast (Est. VLL & Est. LHR)
                     </h2>
                     <p class="text-xs text-slate-400 mt-0.5">Ringkasan estimasi pencapaian akhir bulan berbasis Tren Trimmean & Kalender Aktif.</p>
                 </div>
@@ -181,48 +220,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-
-        <!-- Form Input Data -->
-        <div class="bg-white p-6 rounded-xl shadow-md">
-            <div class="flex justify-between items-center mb-4 border-b pb-2">
-                <h2 id="formTitle" class="text-lg font-semibold text-slate-800">Input Data Evaluasi VLL</h2>
-                <button id="cancelEditBtn" onclick="resetForm()" class="hidden text-xs text-rose-600 hover:underline font-semibold">
-                    ✕ Batal Edit
-                </button>
-            </div>
-            <form id="evalForm" onsubmit="saveData(event)" class="grid grid-cols-1 md:grid-cols-6 gap-4">
-                <input type="hidden" id="editId" value="">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Periode / Hari</label>
-                    <input type="text" id="inputPeriode" placeholder="Contoh: Senin / Minggu ke-1 Senin" required class="w-full px-3 py-2 border rounded-lg text-sm bg-slate-100 focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Jumlah Hari</label>
-                    <input type="number" id="inputHari" placeholder="0" min="0" required class="w-full px-3 py-2 border rounded-lg text-sm bg-slate-100 focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Proyeksi VLL (RA)</label>
-                    <input type="number" id="projVll" placeholder="0" min="0" required class="w-full px-3 py-2 border rounded-lg text-sm bg-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Proyeksi Pendapatan</label>
-                    <input type="number" id="projRev" placeholder="0" min="0" required class="w-full px-3 py-2 border rounded-lg text-sm bg-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Realisasi VLL (RI)</label>
-                    <input type="number" id="realVll" placeholder="0" min="0" required class="w-full px-3 py-2 border rounded-lg text-sm bg-blue-200 focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Realisasi Pendapatan</label>
-                    <input type="number" id="realRev" placeholder="0" min="0" required class="w-full px-3 py-2 border rounded-lg text-sm bg-blue-200 focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div class="flex items-end">
-                    <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition duration-200">
-                        + Tambah Data
-                    </button>
-                </div>
-            </form>
         </div>
 
         <!-- DASHBOARD REKAPITULASI LHR HARI & INDEX HARI (NUMBER) -->
