@@ -72,31 +72,39 @@
         </div>
 
         <!-- 1. DASHBOARD ANALISA PERBANDINGAN RA vs RI (SUMMARY CARDS) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- VLL Comparison Card -->
-            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-600">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- VLL & LHR Comparison Card (Lebih Lebar untuk Akomodasi LHR) -->
+            <div class="lg:col-span-7 bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-600">
                 <h2 class="text-md font-bold text-slate-700 uppercase tracking-wider mb-4 border-b pb-2 flex justify-between items-center">
-                    <span>📊 Perbandingan VLL</span>
+                    <span>📊 Perbandingan VLL & LHR</span>
                     <span id="badgeCapaiVll" class="text-xs px-2.5 py-1 rounded-full font-bold">0%</span>
                 </h2>
-                <div class="grid grid-cols-3 gap-3 text-center">
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center">
                     <div class="bg-amber-50 p-3 rounded-lg border border-amber-200">
-                        <p class="text-xs text-amber-700 font-semibold mb-1">Rencana (RA)</p>
-                        <p id="kpiProjVll" class="text-lg font-bold text-amber-800">0</p>
+                        <p class="text-xs text-amber-700 font-semibold mb-1">VLL (RA)</p>
+                        <p id="kpiProjVll" class="text-base font-bold text-amber-800">0</p>
+                    </div>
+                    <div class="bg-amber-100/70 p-3 rounded-lg border border-amber-300">
+                        <p class="text-xs text-amber-800 font-semibold mb-1">LHR (RA)</p>
+                        <p id="kpiProjLhr" class="text-base font-bold text-amber-900">0</p>
                     </div>
                     <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
-                        <p class="text-xs text-blue-700 font-semibold mb-1">Realisasi (RI)</p>
-                        <p id="kpiRealVll" class="text-lg font-bold text-blue-800">0</p>
+                        <p class="text-xs text-blue-700 font-semibold mb-1">VLL (RI)</p>
+                        <p id="kpiRealVll" class="text-base font-bold text-blue-800">0</p>
                     </div>
-                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
-                        <p class="text-xs text-slate-600 font-semibold mb-1">Deviasi VLL</p>
-                        <p id="kpiDevVll" class="text-lg font-bold text-slate-800">0</p>
+                    <div class="bg-blue-100/70 p-3 rounded-lg border border-blue-300">
+                        <p class="text-xs text-blue-800 font-semibold mb-1">LHR (RI)</p>
+                        <p id="kpiRealLhr" class="text-base font-bold text-blue-900">0</p>
+                    </div>
+                    <div class="bg-gray-100/70 p-3 rounded-lg border border-red-200">
+                        <p class="text-xs text-red-500 font-semibold mb-1">Deviasi VLL</p>
+                        <p id="kpiDevVll" class="text-base font-bold text-red-600">0</p>
                     </div>
                 </div>
             </div>
 
             <!-- Revenue Comparison Card -->
-            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-emerald-600">
+            <div class="lg:col-span-5 bg-white p-6 rounded-xl shadow-md border-t-4 border-emerald-600">
                 <h2 class="text-md font-bold text-slate-700 uppercase tracking-wider mb-4 border-b pb-2 flex justify-between items-center">
                     <span>💰 Perbandingan Pendapatan</span>
                     <span id="badgeCapaiRev" class="text-xs px-2.5 py-1 rounded-full font-bold">0%</span>
@@ -104,15 +112,15 @@
                 <div class="grid grid-cols-3 gap-3 text-center">
                     <div class="bg-amber-50 p-3 rounded-lg border border-amber-200">
                         <p class="text-xs text-amber-700 font-semibold mb-1">Rencana (RA)</p>
-                        <p id="kpiProjRev" class="text-sm font-bold text-amber-800 mt-1">Rp 0</p>
+                        <p id="kpiProjRev" class="text-[13px] font-bold text-amber-800 mt-1">Rp 0</p>
                     </div>
-                    <div class="bg-emerald-50 p-3 rounded-lg border border-emerald-200">
-                        <p class="text-xs text-emerald-700 font-semibold mb-1">Realisasi (RI)</p>
-                        <p id="kpiRealRev" class="text-sm font-bold text-emerald-800 mt-1">Rp 0</p>
+                    <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                        <p class="text-xs text-blue-700 font-semibold mb-1">Realisasi (RI)</p>
+                        <p id="kpiRealRev" class="text-[13px] font-bold text-blue-800 mt-1">Rp 0</p>
                     </div>
-                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
-                        <p class="text-xs text-slate-600 font-semibold mb-1">Deviasi Rp</p>
-                        <p id="kpiDevRev" class="text-sm font-bold text-slate-800 mt-1">Rp 0</p>
+                    <div class="bg-gray-100/70 p-3 rounded-lg border border-red-200">
+                        <p class="text-xs text-red-500 font-semibold mb-1">Deviasi Rp</p>
+                        <p id="kpiDevRev" class="text-[13px] font-bold text-red-600 mt-1">Rp 0</p>
                     </div>
                 </div>
             </div>
@@ -532,16 +540,21 @@
         function renderDashboardComparison() {
             let totalProjVll = 0, totalRealVll = 0;
             let totalProjRev = 0, totalRealRev = 0;
+            let totalHari = 0;
 
             dataReport.forEach(item => {
                 totalProjVll += parseInt(item.projVll) || 0;
                 totalRealVll += parseInt(item.realVll) || 0;
                 totalProjRev += parseInt(item.projRev) || 0;
                 totalRealRev += parseInt(item.realRev) || 0;
+                totalHari += parseInt(item.hari) || 0;
             });
 
             const devVll = totalRealVll - totalProjVll;
             const capaiVll = totalProjVll > 0 ? ((totalRealVll / totalProjVll) * 100).toFixed(1) : 0;
+
+            const lhrProj = totalHari > 0 ? Math.round(totalProjVll / totalHari) : 0;
+            const lhrReal = totalHari > 0 ? Math.round(totalRealVll / totalHari) : 0;
 
             const devRev = totalRealRev - totalProjRev;
             const capaiRev = totalProjRev > 0 ? ((totalRealRev / totalProjRev) * 100).toFixed(1) : 0;
@@ -549,6 +562,9 @@
             document.getElementById('kpiProjVll').innerText = formatNum(totalProjVll);
             document.getElementById('kpiRealVll').innerText = formatNum(totalRealVll);
             document.getElementById('kpiDevVll').innerText = (devVll > 0 ? '+' : '') + formatNum(devVll);
+            
+            document.getElementById('kpiProjLhr').innerText = formatNum(lhrProj);
+            document.getElementById('kpiRealLhr').innerText = formatNum(lhrReal);
 
             const badgeVll = document.getElementById('badgeCapaiVll');
             badgeVll.innerText = capaiVll + '% Capai';
